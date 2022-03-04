@@ -50,8 +50,6 @@ function FeedbackForm() {
         addFeedback(newFeedback);
       }
 
-      addFeedback(newFeedback);
-
       setText('');
     }
   };
