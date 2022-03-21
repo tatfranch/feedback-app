@@ -6,9 +6,19 @@ const FeedbackModel = require('./models/Feedback');
 require('dotenv').config();
 
 const cors = require('cors'); //used to connect with react
+// const corsOptions = {
+//   origin: '*',
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions));
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 
 mongoose.connect(
   `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.uc2be.mongodb.net/feedback_app_db?retryWrites=true&w=majority`
