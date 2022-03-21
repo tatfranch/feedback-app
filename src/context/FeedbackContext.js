@@ -17,8 +17,10 @@ export const FeedbackProvider = ({ children }) => {
   //Fetch feedback
   const fetchFeedback = async () => {
     const response = await fetch(
-      'https://feedback-app-backend-v1.herokuapp.com/getFeedback'
+      'https://feedback-app-backend-v1.herokuapp.com/getFeedback',
+      { method: 'GET' }
     );
+
     const data = await response.json();
 
     setFeedback(data);
