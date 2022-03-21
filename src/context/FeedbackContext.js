@@ -16,7 +16,9 @@ export const FeedbackProvider = ({ children }) => {
 
   //Fetch feedback
   const fetchFeedback = async () => {
-    const response = await fetch(`/feedback?_sort=id&_order=desc`);
+    const response = await fetch(
+      'https://feedback-app-backend-v1.herokuapp.com/getFeedback'
+    );
     const data = await response.json();
 
     setFeedback(data);
@@ -25,13 +27,16 @@ export const FeedbackProvider = ({ children }) => {
 
   // Add feedback
   const addFeedback = async (newFeedback) => {
-    const response = await fetch('/feedback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newFeedback),
-    });
+    const response = await fetch(
+      'https://feedback-app-backend-v1.herokuapp.com/createFeedback',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newFeedback),
+      }
+    );
 
     const data = await response.json();
 
@@ -41,7 +46,10 @@ export const FeedbackProvider = ({ children }) => {
   // Delete feedback
   const deleteFeedback = async (id) => {
     if (window.confirm('Are you sure you want to delete?')) {
-      await fetch(`/feedback/${id}`, { method: 'DELETE' });
+      await fetch(
+        'https://feedback-app-backend-v1.herokuapp.com/deleteFeedback',
+        { method: 'DELETE' }
+      );
 
       setFeedback(feedback.filter((item) => item.id !== id));
     }
@@ -49,13 +57,16 @@ export const FeedbackProvider = ({ children }) => {
 
   // Update feedback feedback data
   const updateFeedback = async (id, updItem) => {
-    const response = await fetch(`/feedback/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updItem),
-    });
+    const response = await fetch(
+      'https://feedback-app-backend-v1.herokuapp.com/updateFeedback',
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updItem),
+      }
+    );
 
     const data = await response.json();
 
