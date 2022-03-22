@@ -13,18 +13,24 @@ export const FeedbackProvider = ({ children }) => {
   useEffect(() => {
     fetchFeedback();
   }, []);
-
+  console.log('feedback', feedback);
   //Fetch feedback
   const fetchFeedback = async () => {
-    const response = await fetch(
-      'https://feedback-app-backend-v1.herokuapp.com/getFeedback',
-      { method: 'GET' }
-    );
+    try {
+      const response = await fetch(
+        'https://feedback-app-backend-v1.herokuapp.com/getFeedback',
+        { method: 'GET', mode: 'cors' }
+      );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    setFeedback(data);
-    setIsLoading(false);
+      setFeedback(data);
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log('error!', error);
+      setIsLoading(false);
+    }
   };
 
   // Add feedback
@@ -36,6 +42,7 @@ export const FeedbackProvider = ({ children }) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
         body: JSON.stringify(newFeedback),
       }
     );
@@ -47,10 +54,11 @@ export const FeedbackProvider = ({ children }) => {
 
   // Delete feedback
   const deleteFeedback = async (id) => {
+    console.log('id', id);
     if (window.confirm('Are you sure you want to delete?')) {
       await fetch(
-        'https://feedback-app-backend-v1.herokuapp.com/deleteFeedback',
-        { method: 'DELETE' }
+        `https://feedback-app-backend-v1.herokuapp.com/Feedback/${id}`,
+        { method: 'DELETE', mode: 'cors' }
       );
 
       setFeedback(feedback.filter((item) => item.id !== id));

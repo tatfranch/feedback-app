@@ -38,8 +38,10 @@ app.post('/createFeedback', async (req, res) => {
   res.json(feedback);
 });
 
-app.delete('/deleteFeedback', (req, res) => {
-  const id = req.body.id;
+app.delete('/Feedback/:id', (req, res) => {
+  const id = req.params.id;
+
+  console.log('ID', id);
   FeedbackModel.findByIdAndDelete(id, (err, result) => {
     if (err) {
       res.json(err);
