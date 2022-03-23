@@ -30,12 +30,17 @@ app.get('/getFeedback', (req, res) => {
   });
 });
 
-app.post('/createFeedback', async (req, res) => {
-  const feedback = req.body;
-  const newFeedback = new FeedbackModel(feedback);
-  await newFeedback.save();
+app.post('/getFeedback', async (req, res) => {
+  try {
+    const feedback = req.body;
+    const newFeedback = new FeedbackModel(feedback);
+    await newFeedback.save();
 
-  res.json(feedback);
+    res.json(feedback);
+    console.log('feedback', feedback);
+  } catch (error) {
+    res.json(error);
+  }
 });
 
 app.delete('/Feedback/:id', (req, res) => {
