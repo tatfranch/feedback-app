@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const FeedbackSchema = new mongoose.Schema({
-  item: {
+  text: {
     type: String,
     required: true,
   },
