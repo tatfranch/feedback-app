@@ -71,7 +71,7 @@ export const FeedbackProvider = ({ children }) => {
 
   // Update feedback feedback data
   const updateFeedback = async (id, updItem) => {
-    const response = await fetch('http://localhost:5000/updateFeedback', {
+    const response = await fetch(`http://localhost:5000/Feedback/${id}`, {
       method: 'PUT',
       mode: 'cors',
       headers: {

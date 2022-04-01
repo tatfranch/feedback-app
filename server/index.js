@@ -46,7 +46,7 @@ app.post('/getFeedback', async (req, res) => {
 app.delete('/Feedback/:id', (req, res) => {
   const id = req.params.id;
 
-  console.log('ID', id);
+  //console.log('ID', id);
   FeedbackModel.findByIdAndDelete(id, (err, result) => {
     if (err) {
       res.json(err);
@@ -56,9 +56,12 @@ app.delete('/Feedback/:id', (req, res) => {
   });
 });
 
-app.put('/updateFeedback', (req, res) => {
-  const id = req.body.id;
+app.put('/Feedback/:id', (req, res) => {
+  const id = req.params.id;
   const updItem = req.body;
+
+  console.log('ID', id);
+
   FeedbackModel.findByIdAndUpdate(id, updItem, (err, result) => {
     if (err) {
       res.json(err);
