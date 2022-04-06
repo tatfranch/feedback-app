@@ -17,10 +17,13 @@ export const FeedbackProvider = ({ children }) => {
   //Fetch feedback
   const fetchFeedback = async () => {
     try {
-      const response = await fetch('http://localhost:5000/getFeedback', {
-        method: 'GET',
-        mode: 'cors',
-      });
+      const response = await fetch(
+        'https://feedback-app-backend-v1.herokuapp.com/getFeedback',
+        {
+          method: 'GET',
+          mode: 'cors',
+        }
+      );
 
       const data = await response.json();
 
@@ -36,14 +39,17 @@ export const FeedbackProvider = ({ children }) => {
   // Add feedback
   const addFeedback = async (newFeedback) => {
     try {
-      const response = await fetch('http://localhost:5000/getFeedback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-        body: JSON.stringify(newFeedback),
-      });
+      const response = await fetch(
+        'https://feedback-app-backend-v1.herokuapp.com/getFeedback',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors',
+          body: JSON.stringify(newFeedback),
+        }
+      );
 
       const data = await response.json();
       console.log('feedback', newFeedback);
@@ -60,10 +66,13 @@ export const FeedbackProvider = ({ children }) => {
   const deleteFeedback = async (id) => {
     console.log('id', id);
     if (window.confirm('Are you sure you want to delete?')) {
-      await fetch(`http://localhost:5000/Feedback/${id}`, {
-        method: 'DELETE',
-        mode: 'cors',
-      });
+      await fetch(
+        `https://feedback-app-backend-v1.herokuapp.com/Feedback/${id}`,
+        {
+          method: 'DELETE',
+          mode: 'cors',
+        }
+      );
 
       setFeedback(feedback.filter((item) => item._id !== id));
     }
@@ -71,14 +80,17 @@ export const FeedbackProvider = ({ children }) => {
 
   // Update feedback feedback data
   const updateFeedback = async (id, updItem) => {
-    const response = await fetch(`http://localhost:5000/Feedback/${id}`, {
-      method: 'PUT',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updItem),
-    });
+    const response = await fetch(
+      `https://feedback-app-backend-v1.herokuapp.com/Feedback/${id}`,
+      {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updItem),
+      }
+    );
 
     const data = await response.json();
 
